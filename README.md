@@ -16,16 +16,20 @@ Esta herramienta permite analizar archivos PST de Outlook dañados, visualizar s
 - **Selección de carpetas**: Permite seleccionar qué carpetas recuperar
 - **Reparación**: Crea una copia del archivo PST con las carpetas seleccionadas
 
-## Requisitos
-
-- Python 3.x
-- Librería `pypff` (instalada mediante `pip install pypff-python --break-system-packages`)
+## Requisitos (Solo Linux y Mac)
+- **Python 3.x**
+- **Librería pypff (instalada mediante pip install pypff-python --break-system-packages)**
 
 ## Uso
 
-### Interfaz Gráfica (GUI)
+### Interfaz Gráfica (GUI) Windows
 ```bash
-python3 pst_repair_gui.py
+OutlookPSTRepair.exe
+```
+
+### Interfaz Gráfica (GUI) Linux & Mac
+```bash
+python3 outlookpstrepair.py
 ```
 
 1. Haga clic en "Examinar..." para seleccionar un archivo PST
@@ -33,29 +37,54 @@ python3 pst_repair_gui.py
 3. Seleccione las carpetas que desea recuperar usando los checkboxes
 4. Haga clic en "Reparar Seleccionadas" para crear el archivo recuperado
 
-### Línea de comandos
+### Línea de comandos Windows
 ```bash
-python3 pst_repair_simple.py "ruta/al/archivo.pst"
+OutlookPSTRepairCli.exe "ruta/al/archivo.pst"
 ```
 
-#### Selección de carpetas (versión CLI)
+### Línea de comandos Linux & Mac
+```bash
+python3 outlookpstrepaircli.py "ruta/al/archivo.pst"
+```
+
+#### Selección de carpetas (versión CLI) Windows
 ```bash
 # Seleccionar carpetas específicas (por número en el árbol mostrado)
-python3 pst_repair_simple.py "ruta/al/archivo.pst" "1,3,5"
+OutlookPSTRepairCli.exe "ruta/al/archivo.pst" "1,3,5"
 
 # Seleccionar un rango
-python3 pst_repair_simple.py "ruta/al/archivo.pst" "2-4"
+OutlookPSTRepairCli.exe "ruta/al/archivo.pst" "2-4"
 
 # Seleccionar todas las carpetas
-python3 pst_repair_simple.py "ruta/al/archivo.pst" "all"
+OutlookPSTRepairCli.exe "ruta/al/archivo.pst" "all"
 
 # No seleccionar ninguna carpeta
-python3 pst_repair_simple.py "ruta/al/archivo.pst" "none"
+OutlookPSTRepairCli.exe "ruta/al/archivo.pst" "none"
 ```
 
-#### Con archivo de salida (simulación de recuperación)
+#### Con archivo de salida (Recuperación)
 ```bash
-python3 pst_repair_simple.py "ruta/al/archivo.pst" "1,3,5" "ruta/al/archivo_recuperado.pst"
+OutlookPSTRepairCli.exe "ruta/al/archivo.pst" "1,3,5" "ruta/al/archivo_recuperado.pst"
+```
+
+#### Selección de carpetas (versión CLI) Linux & Mac
+```bash
+# Seleccionar carpetas específicas (por número en el árbol mostrado)
+python3 outlookpstrepaircli.py "ruta/al/archivo.pst" "1,3,5"
+
+# Seleccionar un rango
+python3 outlookpstrepaircli.py "ruta/al/archivo.pst" "2-4"
+
+# Seleccionar todas las carpetas
+python3 outlookpstrepaircli.py "ruta/al/archivo.pst" "all"
+
+# No seleccionar ninguna carpeta
+python3 outlookpstrepaircli.py "ruta/al/archivo.pst" "none"
+```
+
+#### Con archivo de salida (Recuperación)
+```bash
+python3 outlookpstrepaircli.py "ruta/al/archivo.pst" "1,3,5" "ruta/al/archivo_recuperado.pst"
 ```
 
 ## Ejemplo de salida (CLI)
@@ -91,29 +120,13 @@ Total: 10 carpetas, 66 correos
 
 4. Las carpetas "missing" son aquellas cuyo padre no existe en la estructura del archivo.
 
-## Compilar para Windows
-
-### Requisitos de compilación
-```bash
-pip install pyinstaller
-```
-
-### Compilar ejecutable
-```bash
-pyinstaller --onefile --name OutlookPSTRepairCi --icon=icono.ico pst_repair_gui.py
-```
-
-El parámetro `--name OutlookPSTRepairCi` establece el nombre del ejecutable en Windows.
-
-Opcionalmente puedes agregar un icono:
-```bash
-pyinstaller --onefile --name OutlookPSTRepairCi --icon=icono.ico pst_repair_gui.py
-```
-
-El archivo `.ico` debe ser un icono válido de Windows (puedes crear uno en icoconvert.com).
 
 ## Archivos en este directorio
 
-- `pst_repair_gui.py`: Aplicación con interfaz gráfica (Tkinter)
-- `pst_repair_simple.py`: Versión de línea de comandos
+- `OutlookPSTRepair.exe`: Aplicación con interfaz gráfica Windows (Tkinter)
+- `OutlookPSTRepairCli.exe`: Versión de línea de comandos Windows
+- `libpff.dll`: Libreria reparación Windows (No es necesaria, pero si da error copiarla en la misma carpeta del ejecutable)
+- `outlookpstrepair.py`: Aplicación con interfaz gráfica Linux & Mac (Tkinter)
+- `outlookpstrepaircli.py`: Versión de línea de comandos Linux & Mac
 - `README.md`: Este archivo
+
